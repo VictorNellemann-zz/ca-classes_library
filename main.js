@@ -28,68 +28,63 @@ class Media {
         this._ratings.push(ratings);
     }
 
-    // set title(title) {}
-    // set isCheckedOut(isCheckedOut) {}
-    // set ratings(ratings) {}
-    // getAverageRating(ratings) {}
+    getAverageRating(ratings) {
+        let values = this._ratings;
+        let sum = values.reduce((previous, current) => current += previous);
+        let avg = sum / values.length;
+        this._ratings = Math.floor(avg);
+        return this._ratings;
+    }
 }
+
+class Movie extends Media { // Properties: director, runTime
+    constructor (title, director, runTime) {
+        super(title);
+        this._director = director;
+        this._runTime = runTime;
+    }
+
+    get director() {
+        return this._director;
+    }
+    get runTime() {
+        return this._runTime;
+    }
+}
+
+const heat = new Movie('Heat','Michael Mann', 170);
+heat.addRating(1);
+heat.addRating(3);
+heat.addRating(1)
+heat.addRating(4)
+heat.getAverageRating();
+heat.toggleCheckOutStatus();
+console.dir(heat);
 
 class Book extends Media { // Properties: author, pages
     constructor (title, author, pages) {
         super(title);
-        this.author = author;
-        this.pages = pages;
+        this._author = author;
+        this._pages = pages;
     }
 
     get author() {
-        return this.author;
+        return this._author;
     }
     get pages() {
-        return this.pages;
+        return this._pages;
     }
 }
 
-const film = new Media('Heat');
-
-film.toggleCheckOutStatus();
-film.addRating(1);
-film.addRating(5);
-film.addRating(4);
-console.log(film);
-
-film.toggleCheckOutStatus();
-console.log(film);
-
 const grenadiers = new Book('Grenadiers', 'Kurt Meyer', 386);
+grenadiers.addRating(2);
+grenadiers.addRating(4);
+grenadiers.getAverageRating();
+grenadiers.toggleCheckOutStatus();
+console.dir(grenadiers);
 
-grenadiers.addRating(5);
-console.log(grenadiers);
+const mariesErindringer = new Book('Maries Samlede Erindringer', 'Marie Buhl Simonsen', 296);
+mariesErindringer.toggleCheckOutStatus();
+mariesErindringer.addRating(5);
+console.dir(mariesErindringer);
 
-
-// class Movie extends Media { // Properties: director, runTime
-//     constructor (director, runTime) {
-//         super(title);
-//         this.director = director;
-//         this.runTime = runTime;
-//     }
-
-//     get director() {
-//         return this.director;
-//     }
-//     get runTime() {
-//         return this.runTime;
-//     }
-// }
-
-// class Cd extends Media { // Properties: artist, songs
-//     constructor (artist, songs) {
-//         this.artist = artist;
-//         this.songs = songs;
-//     }
-//     get artist() {
-//         return this.artist;
-//     }
-//     get songs() {
-//         return this.songs;
-//     }
-// }
